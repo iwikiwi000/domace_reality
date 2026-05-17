@@ -1,0 +1,37 @@
+name: Deploy to VPS
+
+on:
+  push:
+    branches:
+      - main # alebo inÃ½ branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.DEPLOY_KEY }}
+
+      - name: Deploy to VPS
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "
+            cd /home/administrator/projects/domacereality &&
+            git reset --hard &&
+            git clean -fd &&
+            git pull origin main &&
+            cd frontend &&
+            npm install &&
+            npm run build &&
+            sudo rm -rf /var/www/html/domacereality/* &&
+            sudo cp -r dist/* /var/www/html/domacereality/ &&
+            cd /home/administrator/projects/domacereality/backend &&
+            npm install &&
+            npm run build &&
+            pm2 start dist/main.js --name domacereality --update-env || pm2 restart domacereality --update-env
+          "

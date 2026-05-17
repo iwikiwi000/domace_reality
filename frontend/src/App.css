@@ -1,0 +1,4963 @@
+.counter {
+  font-size: 16px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: var(--accent);
+  background: var(--accent-bg);
+  border: 2px solid transparent;
+  transition: border-color 0.3s;
+  margin-bottom: 24px;
+
+  &:hover {
+    border-color: var(--accent-border);
+  }
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+}
+
+.favorites-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2em;
+  margin-top: 2em;
+}
+
+#center {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  place-content: center;
+  place-items: center;
+  flex-grow: 1;
+
+  @media (max-width: 1024px) {
+    padding: 32px 20px 24px;
+    gap: 18px;
+  }
+}
+
+#next-steps {
+  display: flex;
+  border-top: 1px solid var(--border);
+  text-align: left;
+
+  & > div {
+    flex: 1 1 0;
+    padding: 32px;
+    @media (max-width: 1024px) {
+      padding: 24px 20px;
+    }
+  }
+
+  .icon {
+    margin-bottom: 16px;
+    width: 22px;
+    height: 22px;
+  }
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+#docs {
+  border-right: 1px solid var(--border);
+
+  @media (max-width: 1024px) {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+}
+
+#next-steps ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 8px;
+  margin: 32px 0 0;
+
+  .logo {
+    height: 18px;
+  }
+
+  a {
+    color: var(--text-h);
+    font-size: 16px;
+    border-radius: 6px;
+    background: var(--social-bg);
+    display: flex;
+    padding: 6px 12px;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    transition: box-shadow 0.3s;
+
+    &:hover {
+      box-shadow: var(--shadow);
+    }
+    .button-icon {
+      height: 18px;
+      width: 18px;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    margin-top: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    li {
+      flex: 1 1 calc(50% - 8px);
+    }
+
+    a {
+      width: 100%;
+      justify-content: center;
+      box-sizing: border-box;
+    }
+  }
+}
+
+#spacer {
+  height: 88px;
+  border-top: 1px solid var(--border);
+  @media (max-width: 1024px) {
+    height: 48px;
+  }
+}
+
+.ticks {
+  position: relative;
+  width: 100%;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: -4.5px;
+    border: 5px solid transparent;
+  }
+
+  &::before {
+    left: 0;
+    border-left-color: var(--border);
+  }
+  &::after {
+    right: 0;
+    border-right-color: var(--border);
+  }
+}
+
+/* ========== HEADER ========== */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 2rem;
+  background-color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.3s ease;
+}
+
+/* Čiara pod header - animovaná */
+header::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  transition: width 0.5s ease;
+}
+
+header:hover::after {
+  width: 100%;
+}
+
+/* Animácia pre navigačné odkazy */
+.header-center a {
+  text-decoration: none;
+  color: var(--primary-color);
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+  padding-bottom: 4px;
+}
+
+/* Čiarka pod odkazmi v header */
+.header-center a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--primary-color);
+  transition: width 0.3s ease;
+}
+
+.header-center a:hover::after {
+  width: 100%;
+}
+
+.header-center a:hover {
+  color: #1565c0;
+  transform: translateY(-2px);
+}
+
+/* Animácia pre tlačidlá */
+.styled-button {
+  color: white;
+  background-color: #0d47a1;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.styled-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.styled-button:hover::before {
+  left: 100%;
+}
+
+.styled-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(13, 71, 161, 0.3);
+}
+
+.styled-button:active {
+  transform: translateY(0);
+}
+
+/* Animácia pre user-email */
+.user-email {
+  color: #0d47a1;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+  padding-bottom: 4px;
+}
+
+.user-email::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #0d47a1, #42a5f5);
+  transition: width 0.3s ease;
+}
+
+.user-email:hover::after {
+  width: 100%;
+}
+
+.user-email:hover {
+  transform: translateY(-2px);
+  color: #1565c0;
+}
+
+/* Animácia pre logo */
+.header-logo {
+  height: 35px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.header-logo:hover {
+  transform: scale(1.05);
+}
+
+/* Animácia pre mobilné tlačidlá */
+.mobile-menu .styled-button {
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+.mobile-menu .styled-button:hover {
+  transform: translateY(-2px);
+}
+
+/* Animácia pre hamburger */
+.mobile-menu-button {
+  transition: transform 0.3s ease;
+}
+
+.mobile-menu-button:hover {
+  transform: scale(1.1);
+}
+
+/* Animácia pre mobilné menu položky */
+.mobile-menu a,
+.mobile-menu span {
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.mobile-menu a::before,
+.mobile-menu span::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(13, 71, 161, 0.1),
+    transparent
+  );
+  transition: left 0.4s ease;
+}
+
+.mobile-menu a:hover::before,
+.mobile-menu span:hover::before {
+  left: 100%;
+}
+
+.mobile-menu a:hover,
+.mobile-menu span:hover {
+  transform: translateX(5px);
+  background-color: rgba(13, 71, 161, 0.05);
+}
+
+.user-email {
+  color: #0d47a1;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+/* Hamburger button - štandardne skrytý */
+.mobile-menu-button {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: #0d47a1;
+  padding: 0.5rem;
+}
+
+.mobile-login-button {
+  display: none;
+  background: #0d47a1;
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+/* Mobile menu */
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 60px;
+  left: 0;
+  right: 0;
+  background: white;
+  flex-direction: column;
+  padding: 1rem;
+  gap: 0.75rem;
+  z-index: 99;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box; /* ← pridaj */
+}
+
+.mobile-menu a,
+.mobile-menu span {
+  padding: 0.75rem 1rem;
+  text-decoration: none;
+  color: #0d47a1;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background 0.2s;
+  text-align: left; /* ← zmeň z implicitného na left */
+  display: block; /* ← pridaj */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.mobile-menu a:hover,
+.mobile-menu span:hover {
+  background-color: #f0f0f0;
+}
+
+.mobile-menu .styled-button {
+  width: 100%;
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+/* Desktop - zobrazenie */
+@media (min-width: 769px) {
+  .desktop-menu {
+    display: flex;
+  }
+  .mobile-menu-button {
+    display: none;
+  }
+  .mobile-login-button {
+    display: none;
+  }
+  .header-logo-container {
+    flex: 1;
+    justify-content: flex-start;
+  }
+}
+
+/* Tablet a mobil */
+@media (max-width: 768px) {
+  header {
+    padding: 0.5rem 1rem;
+  }
+
+  .desktop-menu {
+    display: none;
+  }
+
+  .mobile-menu-button {
+    display: block;
+  }
+
+  .mobile-menu.show {
+    display: flex;
+  }
+
+  .header-logo-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    max-width: 100%;
+  }
+
+  .header-logo {
+    height: 28px;
+    max-width: 100%;
+  }
+
+  .mobile-login-button {
+    display: block;
+  }
+}
+
+/* Malý mobil */
+@media (max-width: 480px) {
+  header {
+    padding: 0.5rem;
+  }
+
+  .header-logo {
+    height: 24px;
+  }
+
+  .mobile-menu-button {
+    font-size: 1.5rem;
+  }
+}
+
+/* Pomocné triedy */
+.desktop-hidden {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .desktop-hidden {
+    display: block;
+  }
+}
+
+/* ========== HOME PAGE ========== */
+.home-page {
+  min-height: 100vh;
+}
+/* ========== OPRAVA PRE CELÚ ŠÍRKU NA MOBILE ========== */
+
+/* ========== REALITY CARD ========== */
+.reality-card {
+  flex: 1 1 300px;
+  max-width: 100%; /* Zmenené z 400px na 100% */
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+  cursor: pointer;
+}
+
+.reality-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.reality-card-image {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.reality-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.reality-card:hover .reality-card-image img {
+  transform: scale(1.05);
+}
+
+.card-content {
+  padding: 1rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-header h4 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0d47a1;
+  margin: 0;
+}
+
+.heart-icon-inline {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.heart-icon-inline:hover {
+  transform: scale(1.1);
+}
+
+.card-content h5 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+  color: #333;
+}
+
+.card-content p {
+  font-size: 0.85rem;
+  color: #666;
+  margin: 0;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+/* ========== REALITIES LIST ========== */
+.realities-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin-bottom: 2rem;
+  padding: 0 1rem;
+}
+
+/* ========== RESPONZÍVNE ÚPRAVY PRE REALITY CARD ========== */
+@media (max-width: 768px) {
+  .realities-list {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 0 1rem;
+  }
+
+  .reality-card {
+    margin: 0;
+    width: 100%;
+  }
+
+  .reality-card-image {
+    height: 180px;
+  }
+
+  .card-header h4 {
+    font-size: 1.1rem;
+  }
+
+  .card-content h5 {
+    font-size: 0.95rem;
+  }
+
+  .card-content p {
+    font-size: 0.8rem;
+  }
+
+  .heart-icon-inline {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .realities-list {
+    gap: 0.75rem;
+    padding: 0 0.75rem;
+  }
+
+  .reality-card-image {
+    height: 160px;
+  }
+
+  .card-content {
+    padding: 0.75rem;
+  }
+
+  .modal-buttons .styled-button {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.75rem;
+  }
+}
+
+/* ========== RESET & ZÁKLAD ========== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
+  font-family:
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+}
+
+/* ========== HEADER ========== */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background-color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header-logo {
+  height: 35px;
+  cursor: pointer;
+}
+
+/* Hamburger button */
+.mobile-menu-button {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: #0d47a1;
+  padding: 0.5rem;
+}
+
+/* Mobile menu */
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 60px;
+  left: 0;
+  right: 0;
+  background: white;
+  flex-direction: column;
+  padding: 1rem;
+  gap: 0.75rem;
+  z-index: 99;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-menu a,
+.mobile-menu span {
+  padding: 0.75rem 1rem;
+  text-decoration: none;
+  color: #0d47a1;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.mobile-menu a:hover,
+.mobile-menu span:hover {
+  background-color: #f0f0f0;
+}
+
+/* Desktop menu (viditeľné na veľkých obrazovkách) */
+@media (min-width: 769px) {
+  .desktop-menu {
+    display: flex;
+  }
+  .mobile-menu-button {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .desktop-menu {
+    display: none;
+  }
+  .mobile-menu-button {
+    display: block;
+  }
+  .mobile-menu.show {
+    display: flex;
+  }
+  .header-logo {
+    height: 28px;
+  }
+}
+
+/* ========== REALITY LIST ========== */
+.realities-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 1rem;
+  box-sizing: border-box;
+}
+
+/* ========== REALITY CARD ========== */
+.reality-card {
+  width: 100%;
+  background-color: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+
+.reality-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.reality-card-image {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.reality-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 1rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-header h4 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #0d47a1;
+  margin: 0;
+}
+
+.heart-icon-inline {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.card-content h5 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.card-content p {
+  font-size: 0.85rem;
+  color: #666;
+  margin: 0;
+}
+
+/* ========== MOBILE RESPONZIVITA ========== */
+@media (max-width: 768px) {
+  .realities-list {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 0 1rem;
+  }
+
+  .reality-card-image {
+    height: 180px;
+  }
+
+  .card-header h4 {
+    font-size: 1.1rem;
+  }
+
+  .heart-icon-inline {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .reality-card-image {
+    height: 160px;
+  }
+
+  .card-content {
+    padding: 0.75rem;
+  }
+}
+
+/* ========== STYLED BUTTON ========== */
+.styled-button {
+  color: white;
+  background-color: #0d47a1;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+/* Desktop - žiadne zmeny */
+.admin-page-wrapper {
+  display: flex;
+  gap: 2rem;
+  padding: 1rem;
+  margin-top: 4rem;
+}
+
+.admin-mobile-header {
+  display: none; /* Skryté na desktope */
+}
+
+.admin-hamburger {
+  display: none; /* Skryté na desktope */
+}
+
+/* Sidebar - normálne vľavo na desktope */
+.admin-sidebar {
+  width: 280px;
+  flex-shrink: 0;
+}
+
+/* Mobilné štýly - aplikujú sa LEN na obrazovkách menších ako 768px */
+@media (max-width: 768px) {
+  .admin-page-wrapper {
+    display: block; /* Zmena na mobil */
+  }
+
+  .admin-mobile-header {
+    display: flex; /* Zobrazenie hamburgeru na mobile */
+  }
+
+  .admin-hamburger {
+    display: block; /* Zobrazenie hamburgeru na mobile */
+  }
+}
+
+/* AdminPage responsive styles */
+.admin-page-wrapper {
+  display: flex;
+  gap: 2rem;
+  padding: 1rem;
+  margin-top: 4rem;
+}
+
+/* Mobile header - hidden on desktop */
+.admin-mobile-header {
+  display: none;
+}
+
+.admin-hamburger {
+  display: none;
+}
+
+.admin-header-spacer {
+  display: none;
+}
+
+.admin-overlay {
+  display: none;
+}
+
+/* Sidebar - normal on desktop */
+.admin-sidebar {
+  width: 280px;
+  flex-shrink: 0;
+}
+
+.admin-sidebar-inner {
+  position: sticky;
+  top: 5rem;
+}
+
+/* Main content */
+.main-content-container {
+  flex: 1;
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+/* ========== MOBILE RESPONSIVE ========== */
+@media (max-width: 768px) {
+  .admin-page-wrapper {
+    display: block;
+    padding: 0;
+    margin-top: 0;
+  }
+
+  /* Mobile header */
+  .admin-mobile-header {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 0.75rem 1rem;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .admin-hamburger {
+    display: block;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #0d47a1;
+    padding: 0.5rem;
+  }
+
+  .admin-header-spacer {
+    display: block;
+    width: 40px;
+  }
+
+  /* Sidebar - becomes top menu on mobile */
+  .admin-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    background: white;
+    z-index: 101;
+    margin: 0;
+    border-radius: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .admin-sidebar.open {
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+
+  .admin-sidebar-inner {
+    position: static;
+    padding: 1rem;
+  }
+
+  /* Navigation on mobile */
+  .admin-sidebar .profile-nav {
+    min-height: auto;
+  }
+
+  /* Overlay */
+  .admin-overlay {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+  }
+
+  /* Main content on mobile */
+  .main-content-container {
+    margin-top: 4rem;
+    border-radius: 0;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-content-container {
+    padding: 0.75rem;
+  }
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+@media (max-width: 768px) {
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+/* ========== REALITY PAGE ========== */
+.reality-page {
+  margin-top: 5rem;
+  width: 100%;
+}
+
+.reality-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  max-width: 1200px;
+  margin: 0 auto 2rem;
+  padding: 0 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.reality-count {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.main-content-container {
+  width: 100%;
+  background-color: white;
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+/* Odstránenie obmedzení šírky na mobile */
+@media (max-width: 768px) {
+  /* Základné kontajnery */
+  .home-page,
+  .reality-page,
+  .reality-detail-page,
+  .profile-container,
+  .settings-container,
+  .auth-wrapper {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Hero sekcia - celá šírka */
+  .hero-section-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .hero-section {
+    width: 100%;
+    max-width: 100%;
+    padding: 0 1rem;
+    margin: 0;
+  }
+
+  /* Search wrapper - celá šírka */
+  .search-wrapper,
+  .search-wrapper.homepage,
+  .search-wrapper.reality-page {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .search-wrapper.homepage .search-container {
+    width: 100%;
+    max-width: 100%;
+    border-radius: 0;
+    margin: 0;
+    padding: 1rem;
+  }
+
+  /* ========== KATEGÓRIE ========== */
+  .categories-container {
+    text-align: center;
+    padding: 2rem;
+    background-color: white;
+  }
+
+  .categories-container h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 2rem;
+  }
+
+  .categories-content {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  /* Animácia len pre PC (od 769px) */
+  @media (min-width: 769px) {
+    .category-card {
+      opacity: 0;
+      animation: fadeInUp 0.5s ease forwards;
+    }
+
+    /* Postupné zobrazenie kariet */
+    .category-card:nth-child(1) {
+      animation-delay: 0.1s;
+    }
+
+    .category-card:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .category-card:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+
+    /* Hover efekt - nadvihnutie a tieň */
+    .category-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 20px rgb(255, 255, 255);
+    }
+
+    /* Ikona - zväčšenie a kruh pri hovore */
+    .category-card:hover .category-icon-wrapper {
+      transform: scale(1.05);
+      box-shadow: 0 0 0 6px rgb(255, 255, 255);
+    }
+
+    /* Text - zmena farby */
+    .category-card:hover h3 {
+      color: #0d47a1;
+    }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Ikona */
+  .category-icon-wrapper {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    border-radius: 50%;
+  }
+
+  .category-icon-wrapper img {
+    width: 50px;
+    height: 50px;
+    transition: transform 0.3s ease;
+  }
+
+  /* Zväčšenie ikony pri hovore */
+  .category-card:hover .category-icon-wrapper img {
+    transform: scale(1.1);
+  }
+
+  .category-card h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0;
+    transition: color 0.3s ease;
+  }
+
+  /* Responzívne úpravy pre mobile (žiadne animácie) */
+  @media (max-width: 768px) {
+    .categories-container {
+      padding: 1rem;
+    }
+
+    .categories-container h1 {
+      font-size: 1.5rem;
+    }
+
+    .categories-content {
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .category-card {
+      width: 100%;
+      max-width: 280px;
+      padding: 1rem;
+    }
+
+    .category-icon-wrapper {
+      width: 60px;
+      height: 60px;
+    }
+
+    .category-icon-wrapper img {
+      width: 35px;
+      height: 35px;
+    }
+
+    .category-card h3 {
+      font-size: 0.9rem;
+    }
+  }
+  /* Zoznam nehnuteľností - celá šírka */
+  .realities-list {
+    width: 100%;
+    max-width: 100%;
+    padding: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .reality-card {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+  }
+
+  /* Detail nehnuteľnosti - celá šírka */
+  .detail-two-columns {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .detail-left,
+  .detail-right {
+    width: 100%;
+  }
+
+  .detail-main-image img {
+    width: 100%;
+    height: auto;
+    min-height: 250px;
+    object-fit: cover;
+  }
+
+  /* Profil - celá šírka */
+  .profile-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .left-sidebar-container,
+  .main-content-container {
+    width: 100%;
+  }
+
+  .profile-main {
+    padding: 1rem;
+  }
+
+  /* Admin tabuľka - celá šírka */
+  .admin-table {
+    width: 100%;
+    display: block;
+    overflow-x: auto;
+  }
+
+  /* Footer - celá šírka */
+  .footer {
+    width: 100%;
+    padding: 2rem 1rem;
+  }
+
+  .footer-content {
+    width: 100%;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  /* Odstránenie max-width obmedzení */
+  .container,
+  .search-container,
+  .detail-container,
+  .settings-card,
+  .auth-card {
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
+/* ========== HOME PAGE ========== */
+.home-page {
+  min-height: 100vh;
+  background-color: white;
+}
+
+/* Hero sekcia */
+.hero-section-container {
+  width: 100%;
+  background-image: url("/new-background.png");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  position: relative;
+}
+
+/* Biely gradient pod hero */
+.hero-section-container::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background: white;
+  border-top-left-radius: 60px;
+  border-top-right-radius: 60px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hero-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 2rem;
+}
+
+.hero-overlay {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4rem 0;
+}
+
+.hero-content {
+  /* margin-top: 3rem; */
+  padding-bottom: 4rem;
+  text-align: left;
+}
+
+.hero-title {
+  font-size: 4rem;
+  font-weight: 700;
+  color: white;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  color: white;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+  margin-bottom: 2rem;
+}
+
+/* Hero tlačidlá */
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-start;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.hero-button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.hero-button.primary {
+  background-color: white;
+  color: #0d47a1;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.hero-button.primary:hover {
+  background-color: #f0f0f0;
+  transform: translateY(-2px);
+}
+
+.hero-button.secondary {
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+  backdrop-filter: blur(5px);
+}
+
+.hero-button.secondary:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+/* ========== SEARCH FORM ========== */
+.search-wrapper {
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Pre HomePage - prekrývanie hero */
+.search-wrapper.homepage {
+  position: relative;
+  margin-top: -11rem;
+  z-index: 10;
+  padding: 0;
+}
+
+.search-wrapper.homepage .search-container {
+  border-radius: 60px 60px 0 0;
+  background-color: white;
+  padding: 2rem;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* Pre Reality page */
+.search-wrapper.reality-page {
+  max-width: 1200px;
+  margin: 0 auto 2rem auto;
+  padding: 0 1rem;
+}
+
+.search-wrapper.reality-page .search-container {
+  border-radius: 24px;
+  background-color: white;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.search-container {
+  width: 100%;
+  position: relative;
+}
+
+.search-form {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-end;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.search-field {
+  flex: 1;
+  min-width: 160px;
+}
+
+/* Cena pole - širšie */
+.price-field {
+  min-width: 280px;
+}
+
+.price-range-container {
+  width: 100%;
+}
+
+.price-values {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.price-min,
+.price-max {
+  background: #f5f5f5;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  color: #0d47a1;
+}
+
+.price-separator {
+  color: #999;
+  font-size: 0.9rem;
+}
+
+.price-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+  font-size: 0.7rem;
+  color: #999;
+}
+
+/* Skrytie defaultného labelu pre MUI Select (používame vlastný label) */
+.search-field .MuiInputLabel-root {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #666;
+}
+
+/* Tlačidlo */
+.search-button {
+  background-color: #0d47a1;
+  color: white;
+  margin-bottom: 1rem;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 120px;
+  height: 56px;
+}
+
+.search-button:hover {
+  background-color: var(--primary-color);
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* Responzívne úpravy */
+@media (max-width: 900px) {
+  .search-form {
+    gap: 0.75rem;
+  }
+
+  .search-field {
+    min-width: 140px;
+  }
+
+  .price-field {
+    min-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .search-wrapper.homepage {
+    margin-top: -3rem;
+  }
+
+  .search-wrapper.homepage .search-container {
+    border-radius: 30px 30px 0 0;
+    padding: 1rem;
+  }
+
+  .search-form {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .search-field {
+    width: 100%;
+  }
+
+  .search-button {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+
+  .price-values {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .search-wrapper.homepage {
+    margin-top: -2rem;
+  }
+
+  .price-min,
+  .price-max {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.5rem;
+  }
+}
+
+/* ========== KATEGÓRIE ========== */
+.categories-section {
+  padding: 2rem 2rem 4rem 2rem;
+  background-color: white;
+  position: relative;
+  z-index: 5;
+}
+
+.categories-container {
+  padding: 2em;
+  background-color: var(--primary-color);
+  color: white;
+  cursor: pointer;
+}
+
+.categories-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 2em;
+  padding: 1em;
+  flex-wrap: wrap;
+}
+
+.category-card {
+  width: 250px;
+  text-align: center;
+}
+
+.category-card img {
+  width: 64px;
+  height: 64px;
+}
+
+.category-image {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.category-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.category-card-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.category-card-content h5 {
+  margin: 0;
+  font-size: 1.2rem;
+  z-index: 1;
+}
+
+/* ========== RESPONZÍVNE ÚPRAVY ========== */
+@media (max-width: 900px) {
+  .search-container {
+    padding: 0;
+  }
+
+  .search-form {
+    gap: 0.75rem;
+  }
+
+  .search-field {
+    min-width: 140px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-section-container::after {
+    height: 100px;
+  }
+
+  .hero-title {
+    font-size: 2.5rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  /* .hero-content {
+    margin-top: 2rem;
+  } */
+
+  .hero-buttons {
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+
+  .hero-button {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+
+  .search-wrapper.homepage {
+    margin-top: -3rem;
+  }
+
+  .search-wrapper.homepage .search-container {
+    border-radius: 30px 30px 0 0;
+    padding: 1rem;
+  }
+
+  .search-form {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .search-field {
+    width: 100%;
+  }
+
+  .search-button {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+
+  .categories-section {
+    padding: 2rem 1rem 2rem 1rem;
+  }
+
+  .categories-content {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 1.8rem;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .hero-button {
+    width: 100%;
+    text-align: center;
+  }
+
+  .search-wrapper.homepage {
+    margin-top: -2rem;
+  }
+}
+
+/* ========== OSTATNÉ ========== */
+.styled-button {
+  color: white;
+  background-color: var(--primary-color);
+  border: 1px transparent;
+  border-radius: 6px;
+  padding: 0.5em;
+  cursor: pointer;
+}
+
+.styled-button-white {
+  color: var(--primary-color);
+  background-color: white;
+  border: 1px solid var(--primary-color);
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.styled-button-white:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.styled-button-white:hover img {
+  filter: brightness(0) invert(1);
+}
+
+.styled-button-white img {
+  width: 18px;
+  height: 18px;
+}
+
+.styled-input {
+  color: #333;
+  background-color: white;
+  border: 2px solid var(--primary-color);
+  border-radius: 6px;
+  padding: 0.5em;
+  outline: none;
+  transition: 0.2s;
+}
+
+/* Realities */
+
+.reality-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+  max-width: 1200px;
+  width: 100%;
+  padding: 0 1rem;
+}
+
+.reality-count {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0;
+}
+
+.reality-sort {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.reality-sort label {
+  white-space: nowrap;
+  margin-right: 0.5rem;
+}
+
+/* Štýly pre FormSelect v reality-sort - zachovanie animácie labelu */
+.reality-sort .MuiFormControl-root {
+  margin-bottom: 0 !important;
+  min-width: 180px; /* Šírka podľa potreby */
+}
+
+.reality-sort .MuiInputLabel-root {
+  font-size: 0.85rem;
+  color: #666;
+  /* Animácia labelu je automatická od MUI */
+}
+
+.reality-sort .MuiOutlinedInput-root {
+  font-size: 0.9rem;
+}
+
+/* Necháme MUI, aby sa staralo o animáciu labelu */
+.reality-sort .MuiInputLabel-root.Mui-focused {
+  color: #0d47a1;
+}
+
+.reality-sort
+  .MuiOutlinedInput-root.Mui-focused
+  .MuiOutlinedInput-notchedOutline {
+  border-color: #0d47a1;
+}
+
+@media (max-width: 480px) {
+  .reality-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .reality-sort {
+    width: 100%;
+  }
+
+  .reality-sort .MuiFormControl-root {
+    width: 100%;
+    min-width: auto;
+  }
+}
+
+.reality-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+  max-width: 1200px;
+  width: 100%;
+  padding-bottom: 2rem;
+}
+
+.reality-card {
+  flex: 1 1 300px;
+  max-width: 400px;
+
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.reality-card-image img {
+  width: 100%;
+  object-fit: cover;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  height: 200px;
+}
+
+.cards-container {
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+  padding: 0 1rem;
+  align-items: stretch;
+
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-top: 2rem;
+}
+
+.reality-image {
+  position: relative;
+}
+
+.main-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+
+  display: block;
+}
+
+.heart-icon {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+
+  width: 30px;
+  height: auto;
+
+  cursor: pointer;
+  transition: 0.2s;
+
+  margin-bottom: 0.5rem;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.heart-icon:hover {
+  transform: scale(1.1);
+}
+
+.heart-icon:active {
+  transform: scale(1.3);
+}
+
+.card-content {
+  margin-top: 1em;
+  padding: 1em;
+  padding-left: 1.5em;
+  padding-right: 1.5em;
+  flex: 1;
+  text-align: left;
+
+  position: relative;
+}
+
+/* layout */
+.realities-list {
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+  align-items: stretch;
+
+  flex-wrap: wrap;
+  max-width: 1200px;
+}
+
+.reality-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5em;
+}
+
+.reality-detail-page {
+  max-width: 1200px;
+  margin: 5rem auto 2rem;
+  padding: 0 1rem;
+}
+
+.detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.detail-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.detail-like {
+  width: 48px;
+  height: 48px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s;
+}
+
+.detail-like:hover {
+  transform: scale(1.05);
+}
+
+.detail-like img {
+  width: 24px;
+  height: 24px;
+}
+
+.detail-price-location {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.detail-location {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  color: #666;
+}
+
+.location-icon {
+  font-size: 1.2rem;
+}
+
+.detail-price {
+  display: flex;
+  align-items: baseline;
+}
+
+.price-value {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #0d47a1;
+}
+
+.detail-two-columns {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 2rem;
+}
+
+/* Ľavý stĺpec */
+.detail-left {
+  min-width: 0;
+}
+
+.detail-main-image {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+
+.detail-main-image img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+
+.image-count {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 30px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.detail-thumbnails {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.thumbnail {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+}
+
+.thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.thumbnail.more {
+  position: relative;
+}
+
+.more-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+/* Kartičky */
+.detail-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  border: 1px solid #eee;
+}
+
+.detail-card h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.detail-card p {
+  line-height: 1.6;
+  color: #555;
+  margin: 0;
+}
+
+/* Tabuľka informácií */
+.detail-info-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.detail-info-table tr {
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.detail-info-table tr:last-child {
+  border-bottom: none;
+}
+
+.detail-info-table .info-label {
+  padding: 0.6rem 0;
+  color: #666;
+  font-size: 0.85rem;
+  width: 45%;
+}
+
+.detail-info-table .info-value {
+  padding: 0.6rem 0;
+  font-weight: 500;
+  color: #333;
+  text-align: right;
+}
+
+/* Vybavenie */
+.detail-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.feature {
+  background: #e3f2fd;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  color: #0d47a1;
+}
+
+/* Adresa */
+.detail-address {
+  color: #555;
+  line-height: 1.5;
+}
+
+/* Kontakt */
+.contact-name {
+  margin-bottom: 0.5rem;
+}
+
+.contact-email {
+  color: #0d47a1;
+  word-break: break-all;
+}
+
+/* Tlačidlá pre admina */
+.detail-admin-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.btn-edit,
+.btn-delete {
+  flex: 1;
+  padding: 0.6rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+}
+
+.btn-edit {
+  background-color: #0d47a1;
+  color: white;
+}
+
+.btn-edit:hover {
+  background-color: #1565c0;
+}
+
+.btn-delete {
+  background-color: #f44336;
+  color: white;
+}
+
+.btn-delete:hover {
+  background-color: #d32f2f;
+}
+
+/* Štýl pre tlačidlo srdiečka */
+.like-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--primary-color);
+  background-color: white;
+  border: 2px solid var(--primary-color);
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.9rem;
+}
+
+.like-button:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.like-button:hover img {
+  filter: brightness(0) invert(1);
+}
+
+.like-button img {
+  width: 18px;
+  height: 18px;
+}
+
+/* Responzívne úpravy */
+@media (max-width: 900px) {
+  .detail-two-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-right {
+    order: -1;
+  }
+
+  .detail-main-image img {
+    height: 300px;
+  }
+
+  .detail-title {
+    font-size: 1.4rem;
+  }
+
+  .price-value {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .detail-thumbnails {
+    gap: 0.3rem;
+  }
+
+  .thumbnail {
+    width: 60px;
+    height: 60px;
+  }
+
+  .detail-main-image img {
+    height: 250px;
+  }
+
+  .detail-price-location {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* ========== FOOTER ========== */
+.footer {
+  background: linear-gradient(135deg, #0d2b5e 0%, #1e4fa3 100%);
+  color: white;
+  padding: 4rem 2rem 2rem;
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* Dekoratívny prvok na vrchu */
+.footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+  gap: 2.5rem;
+  align-items: flex-start;
+}
+
+/* Footer sekcie */
+.footer-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  animation: fadeInUp 0.6s ease forwards;
+  opacity: 0;
+}
+
+.footer-section:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.footer-section:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.footer-section:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.footer-section:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.footer-section h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.5rem;
+}
+
+.footer-section h4::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 30px;
+  width: 0px;
+  height: 2px;
+  background: #f8f8f8;
+  transition: width 0.3s ease;
+}
+
+.footer-section:hover h4::after {
+  width: 160px;
+}
+
+/* Logo */
+.footer-logo {
+  width: 160px;
+  margin-bottom: 0.5rem;
+  filter: brightness(0) invert(1);
+  transition: transform 0.3s ease;
+}
+
+.footer-logo:hover {
+  transform: scale(1.02);
+}
+
+.footer-section p {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  opacity: 0.9;
+  margin: 0;
+}
+
+/* Odkazy - listy */
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 0.5rem;
+}
+
+.footer-section ul li a {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-size: 0.85rem;
+  display: inline-block;
+}
+
+.footer-section ul li:hover {
+  color: white;
+  transform: translateX(5px);
+  text-decoration: none;
+}
+
+/* Sociálne siete */
+.footer-socials {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.social-icon {
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  color: white;
+  text-decoration: none;
+}
+
+.social-icon i {
+  font-size: 1rem;
+}
+
+.social-icon:hover {
+  color: #0d2b5e;
+  transform: translateY(-3px);
+}
+
+/* Kontaktné informácie */
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.8);
+  transition: transform 0.3s ease;
+}
+
+.contact-info:hover {
+  transform: scale(1.02);
+  color: white;
+}
+
+.contact-icon {
+  font-size: 1.1rem;
+  min-width: 24px;
+}
+
+.contact-info p {
+  margin: 0;
+  line-height: 1.4;
+}
+
+.contact-info-img img {
+  border-radius: 80px;
+  border: 2px solid var(--primary-color);
+}
+
+.contact-info img {
+  width: 100px;
+  height: 100px;
+}
+
+/* Footer bottom */
+.footer-bottom {
+  max-width: 1200px;
+  margin: 3rem auto 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 0.8rem;
+}
+
+.footer-bottom p {
+  margin: 0;
+  opacity: 0.7;
+}
+
+.footer-bottom-links {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.footer-bottom-links a {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-bottom-links:hover {
+  color: white;
+  text-decoration: underline;
+}
+
+/* Newsletter (voliteľné) */
+.newsletter {
+  margin-top: 1rem;
+}
+
+.newsletter h4 {
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.newsletter-form {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.newsletter-input {
+  flex: 1;
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  font-size: 0.85rem;
+}
+
+.newsletter-input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.newsletter-input:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.newsletter-button {
+  padding: 0.6rem 1rem;
+  background: #ffffff;
+  border: none;
+  border-radius: 8px;
+  color: #0d2b5e;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.newsletter-button:hover {
+  background: #ffffff;
+  transform: translateY(-2px);
+}
+
+/* Responzívne úpravy */
+@media (max-width: 900px) {
+  .footer-content {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  .footer {
+    padding: 3rem 1.5rem 1.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .footer {
+    padding: 2rem 1rem 1rem;
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+    margin-top: 2rem;
+  }
+
+  .footer-bottom-links {
+    justify-content: center;
+  }
+
+  .footer-section h4::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .footer-section h4 {
+    text-align: center;
+  }
+
+  .footer-section p {
+    text-align: center;
+  }
+
+  .footer-socials {
+    justify-content: center;
+  }
+
+  .contact-info {
+    justify-content: center;
+  }
+}
+
+/* AUTH PAGE LAYOUT */
+/* ========== AUTH PAGE - RESPONZÍVNY ========== */
+.auth-wrapper {
+  max-width: 1100px;
+  margin: 3rem auto;
+  margin-top: 5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+}
+
+.auth-card {
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.auth-card h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  color: #1e4fa3;
+}
+
+.auth-error {
+  color: red;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  background-color: #ffebee;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.form-link {
+  margin-top: 1rem;
+  color: #1e4fa3;
+  cursor: pointer;
+  font-weight: 600;
+  text-align: center;
+}
+
+.form-link:hover {
+  text-decoration: underline;
+}
+
+.auth-image {
+  background-image: url("/house-placeholder.jpg");
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* ========== MOBILNÁ VERZIA ========== */
+@media (max-width: 768px) {
+  .auth-wrapper {
+    grid-template-columns: 1fr;
+    border-radius: 12px;
+  }
+
+  .auth-card {
+    padding: 2rem;
+  }
+
+  .auth-card h1 {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .auth-image {
+    display: none;
+  }
+
+  .form-link {
+    font-size: 0.9rem;
+  }
+
+  .styled-button {
+    width: 100%;
+    padding: 0.7rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-wrapper {
+  }
+
+  .auth-card {
+    padding: 1.5rem;
+  }
+
+  .auth-card h1 {
+    font-size: 1.3rem;
+  }
+
+  .auth-card .styled-button {
+    padding: 0.6rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* LAYOUT */
+/* ========== PROFILE PAGE - RESPONZÍVNY ========== */
+.profile-page-wrapper {
+  display: flex;
+  gap: 2rem;
+  padding: 1rem;
+  margin-top: 4rem;
+}
+
+/* Mobile header - hidden on desktop */
+.profile-mobile-header {
+  display: none;
+}
+
+.profile-hamburger {
+  display: none;
+}
+
+.profile-header-spacer {
+  display: none;
+}
+
+.profile-overlay {
+  display: none;
+}
+
+/* Sidebar - normal on desktop */
+.profile-sidebar {
+  width: 280px;
+  flex-shrink: 0;
+  background: #ffffff;
+  color: white;
+  padding: 2rem 1.5rem;
+  border-radius: 12px;
+  height: fit-content;
+}
+
+.profile-sidebar-inner {
+  position: sticky;
+  top: 5rem;
+}
+
+/* Main content */
+.profile-main-content {
+  flex: 1;
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  min-height: 500px;
+}
+
+/* ========== MOBILE RESPONSIVE ========== */
+@media (max-width: 768px) {
+  .profile-page-wrapper {
+    display: block;
+    padding: 0;
+    margin-top: 0;
+  }
+
+  /* Mobile header */
+  .profile-mobile-header {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 0.75rem 1rem;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .profile-hamburger {
+    display: block;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #0d47a1;
+    padding: 0.5rem;
+  }
+
+  .profile-mobile-header h2 {
+    font-size: 1.1rem;
+    margin: 0;
+    color: #333;
+  }
+
+  .profile-header-spacer {
+    display: block;
+    width: 40px;
+  }
+
+  /* Sidebar - becomes top menu on mobile */
+  .profile-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    background: #ffffff;
+    z-index: 101;
+    margin: 0;
+    border-radius: 0;
+    padding: 0;
+  }
+
+  .profile-sidebar.open {
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+
+  .profile-sidebar-inner {
+    position: static;
+    padding: 1.5rem;
+  }
+
+  /* Navigation on mobile */
+  .profile-sidebar .profile-nav {
+    min-height: auto;
+  }
+
+  .profile-sidebar .profile-nav p {
+    font-size: 0.9rem;
+    padding: 0.5rem 0.8rem;
+  }
+
+  /* Overlay */
+  .profile-overlay {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+  }
+
+  /* Main content on mobile */
+  .profile-main-content {
+    margin-top: 4rem;
+    border-radius: 0;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-main-content {
+    padding: 0.75rem;
+  }
+
+  .profile-sidebar.open {
+    max-height: 80vh;
+  }
+}
+.edit-profile-btn:hover {
+  background: #e6e6e6;
+}
+
+/* NAVIGATION */
+.profile-nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  min-height: 400px;
+  width: 100%;
+  gap: 1rem;
+}
+
+.profile-nav-top {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: black;
+}
+
+.profile-nav-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: auto;
+  color: black;
+}
+
+.profile-nav p {
+  cursor: pointer;
+  padding: 0.6rem 0.8rem;
+  border-radius: 6px;
+  transition: 0.2s;
+  text-align: left;
+}
+
+/* MAIN CONTENT */
+.profile-main {
+  padding: 2rem 3rem;
+}
+
+/* Img slider */
+.slider-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.slider-modal {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+}
+
+.slider-image {
+  max-width: 600px;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.slider-counter {
+  position: absolute;
+  bottom: -2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+}
+
+/* Form */
+
+.reality-form {
+  margin-top: 5em;
+}
+
+/* form image */
+
+.images-section {
+  margin: 1rem 0;
+  padding: 1rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+}
+
+.image-label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.file-input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.image-section-title {
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin: 1rem 0 0.5rem 0;
+  color: #555;
+}
+
+.image-preview-item {
+  position: relative;
+  display: inline-block;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 0.5rem;
+  background: #f9f9f9;
+}
+
+.preview-image {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.delete-image-btn {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #ff4444;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.delete-image-btn:hover {
+  background: #cc0000;
+}
+
+.image-name {
+  display: block;
+  font-size: 11px;
+  text-align: center;
+  margin-top: 0.5rem;
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.form-link {
+  text-decoration: underline;
+  color: var(--primary-color);
+  cursor: pointer;
+}
+
+/* Responzívne štýly pre formulár */
+@media (max-width: 768px) {
+  .reality-form {
+    margin-top: 2rem;
+  }
+
+  .reality-form .MuiContainer-root {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .reality-form .MuiPaper-root {
+    padding: 1rem !important;
+  }
+
+  .reality-form .MuiTypography-h4 {
+    font-size: 1.5rem;
+  }
+
+  .reality-form .MuiTypography-h6 {
+    font-size: 1.1rem;
+  }
+
+  .reality-form .MuiStepper-root {
+    padding: 0;
+  }
+
+  .reality-form .MuiStepLabel-label {
+    font-size: 0.7rem;
+  }
+
+  .reality-form .MuiStepIcon-root {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .reality-form .MuiStepLabel-labelContainer {
+    padding: 0;
+  }
+
+  .reality-form .MuiButton-root {
+    padding: 0.4rem 1rem;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .reality-form .MuiStepLabel-label {
+    display: none;
+  }
+
+  .reality-form .MuiTypography-h4 {
+    font-size: 1.3rem;
+    text-align: center;
+  }
+
+  .reality-form .MuiTypography-h6 {
+    font-size: 1rem;
+  }
+}
+
+/* Modal */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* Modal - centrovaný */
+.modal-overlay-centered {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-container {
+  position: relative;
+  background: white;
+  border-radius: 24px;
+  padding: 2rem;
+  max-width: 420px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #999;
+  transition: color 0.2s;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.modal-close:hover {
+  color: #333;
+  background-color: #f0f0f0;
+}
+
+.modal-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.modal-container h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: #333;
+}
+
+.modal-container p {
+  font-size: 0.95rem;
+  color: #666;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+.modal-buttons-centered {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.modal-btn-primary {
+  background-color: #0d47a1;
+  color: white;
+  border: none;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.modal-btn-primary:hover {
+  background-color: #1565c0;
+  transform: translateY(-2px);
+}
+
+.modal-btn-secondary {
+  background-color: transparent;
+  color: #0d47a1;
+  border: 2px solid #0d47a1;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.modal-btn-secondary:hover {
+  background-color: rgba(13, 71, 161, 0.05);
+  transform: translateY(-2px);
+}
+
+.modal-btn-outline {
+  background-color: transparent;
+  color: #666;
+  border: 1px solid #ddd;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.modal-btn-outline:hover {
+  background-color: #f5f5f5;
+}
+
+/* Responzívne úpravy */
+@media (max-width: 480px) {
+  .modal-container {
+    padding: 1.5rem;
+    width: 85%;
+  }
+
+  .modal-container h3 {
+    font-size: 1.3rem;
+  }
+
+  .modal-container p {
+    font-size: 0.85rem;
+  }
+}
+
+.modal-box {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.styled-button-outline {
+  background: transparent;
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.button-icon {
+  width: 18px;
+  height: 18px;
+  margin-left: 0.5rem;
+  margin-bottom: 5px;
+}
+
+/* AdminPage.css */
+
+/* Štýly pre tabuľku */
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-table th {
+  text-align: left;
+  padding: 0.75rem;
+  border-bottom: 2px solid #ddd;
+  font-weight: 600;
+  color: #333;
+}
+
+.admin-table td {
+  padding: 0.75rem;
+  border-bottom: 1px solid #eee;
+  vertical-align: middle;
+}
+
+.admin-table tr:hover {
+  background-color: #f9f9f9;
+}
+
+/* Tlačidlá v tabuľke */
+.btn-edit {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 8px;
+  font-size: 13px;
+  transition: background-color 0.2s;
+}
+
+.btn-edit:hover {
+  background-color: rgb(8, 16, 77);
+}
+
+.btn-delete {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: background-color 0.2s;
+}
+
+.btn-delete:hover {
+  background-color: #da190b;
+}
+
+.custom-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.custom-modal-content {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  min-width: 400px;
+  max-width: 90%;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.custom-modal-content h3 {
+  margin-bottom: 1.5rem;
+  color: #333;
+  font-size: 1.25rem;
+}
+
+.custom-modal-content .form-group {
+  margin-bottom: 1rem;
+}
+
+.custom-modal-content .form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #555;
+}
+
+.custom-modal-content .form-control {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.2s;
+}
+
+.custom-modal-content .form-control:focus {
+  outline: none;
+  border-color: #1976d2;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 1.5rem;
+}
+
+.btn-cancel {
+  background-color: #f5f5f5;
+  color: #333;
+  border: 1px solid #ddd;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.btn-cancel:hover {
+  background-color: #e0e0e0;
+}
+
+.btn-save {
+  background-color: #1976d2;
+  color: white;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.btn-save:hover {
+  background-color: #1565c0;
+}
+
+/* Profilová navigácia */
+.profile-info {
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.profile-info h4 {
+  margin: 0 0 4px 0;
+  color: #333;
+  font-size: 1rem;
+}
+
+.profile-info p {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #000000;
+}
+
+.left-sidebar-container {
+  color: #000000;
+  border: 1px solid transparent;
+  background-color: white;
+  border-radius: 10px;
+}
+
+/* Responzívne úpravy */
+@media (max-width: 768px) {
+  .custom-modal-content {
+    min-width: 300px;
+    padding: 1.5rem;
+  }
+
+  .admin-table th,
+  .admin-table td {
+    padding: 0.5rem;
+    font-size: 12px;
+  }
+
+  .btn-edit,
+  .btn-delete {
+    padding: 4px 8px;
+    font-size: 11px;
+  }
+}
+
+/* SettingsPage.css */
+.settings-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+}
+
+.settings-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+}
+
+.settings-card h1 {
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  color: #333;
+  border-bottom: 2px solid #0d47a1;
+  padding-bottom: 0.5rem;
+}
+
+.settings-form {
+  margin-bottom: 2rem;
+}
+
+.settings-section {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid #eee;
+}
+
+.settings-section h2 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  color: #555;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #555;
+}
+
+.settings-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+
+.settings-input:focus {
+  outline: none;
+  border-color: #0d47a1;
+  box-shadow: 0 0 0 3px rgba(13, 71, 161, 0.1);
+}
+
+.settings-button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.settings-button.primary {
+  background-color: #0d47a1;
+  color: white;
+}
+
+.settings-button.primary:hover {
+  background-color: #1565c0;
+  transform: translateY(-1px);
+}
+
+.settings-button.secondary {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.settings-button.secondary:hover {
+  background-color: #e0e0e0;
+}
+
+.settings-button.danger {
+  background-color: #f5f5f5;
+  color: #666;
+  border: 1px solid #ddd;
+}
+
+.settings-button.danger:hover {
+  background-color: #eee;
+}
+
+.settings-button.delete {
+  background-color: #f44336;
+  color: white;
+}
+
+.settings-button.delete:hover {
+  background-color: #d32f2f;
+}
+
+.settings-buttons-group {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.danger-zone {
+  background-color: #fff5f5;
+  border: 1px solid #ffcdd2;
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+.danger-zone p {
+  color: #d32f2f;
+  margin-bottom: 1rem;
+}
+
+/* Responzívne úpravy */
+@media (max-width: 768px) {
+  .settings-container {
+    padding: 1rem;
+  }
+
+  .settings-card {
+    padding: 1.5rem;
+  }
+
+  .settings-buttons-group {
+    flex-direction: column;
+  }
+
+  .settings-button {
+    width: 100%;
+  }
+}
+
+/* ErrorPage.css */
+.error-page {
+  min-height: 100vh;
+  background-image: url("/error-bg.png"); /* Môžete použiť vlastný obrázok alebo farbu */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+}
+
+/* Tmavý overlay pre lepšiu čitateľnosť */
+.error-page::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.7);
+  z-index: 1;
+}
+
+.error-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: black;
+  max-width: 600px;
+  padding: 3rem;
+}
+
+.error-content h1 {
+  font-size: 8rem;
+  margin: 0;
+  font-weight: 700;
+  color: var(--primary-color);
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+  letter-spacing: 0.05em;
+}
+
+.error-content h2 {
+  font-size: 2rem;
+  margin: 0.5rem 0 1rem 0;
+  font-weight: 500;
+}
+
+.error-content p {
+  font-size: 1.1rem;
+  margin: 1rem 0 2rem 0;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+.error-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.error-btn {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.error-btn.primary {
+  background-color: var(--primary-color);
+  color: white;
+  box-shadow: 0 2px 8px rgba(255, 107, 107, 0.3);
+}
+
+.error-btn.primary:hover {
+  background-color: #ff5252;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
+}
+
+.error-btn.secondary {
+  background-color: transparent;
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+  backdrop-filter: blur(4px);
+}
+
+.error-btn.secondary:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Responzívne úpravy */
+@media (max-width: 768px) {
+  .error-content {
+    padding: 2rem;
+    margin: 1rem;
+  }
+
+  .error-content h1 {
+    font-size: 5rem;
+  }
+
+  .error-content h2 {
+    font-size: 1.5rem;
+  }
+
+  .error-content p {
+    font-size: 0.95rem;
+  }
+
+  .error-btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .error-content h1 {
+    font-size: 3.5rem;
+  }
+
+  .error-content h2 {
+    font-size: 1.2rem;
+  }
+
+  .error-buttons {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .error-btn {
+    width: 100%;
+  }
+}
+
+/* ========== 404 PAGE - NOT FOUND ========== */
+.not-found-page {
+  min-height: 100vh;
+  background-image: url("/404-bg.png"); /* Môžete použiť vlastný obrázok */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Tmavý overlay pre lepšiu čitateľnosť */
+.not-found-page::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.85);
+  z-index: 1;
+}
+
+.not-found-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: #333;
+  max-width: 600px;
+  padding: 3rem;
+}
+
+.not-found-content h1 {
+  font-size: 8rem;
+  margin: 0;
+  font-weight: 700;
+  color: var(--primary-color);
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+  letter-spacing: 0.05em;
+}
+
+.not-found-content h2 {
+  font-size: 2rem;
+  margin: 0.5rem 0 1rem 0;
+  font-weight: 500;
+  color: #333;
+}
+
+.not-found-content p {
+  font-size: 1.1rem;
+  margin: 1rem 0 2rem 0;
+  line-height: 1.6;
+  color: #555;
+}
+
+.not-found-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.not-found-btn {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.not-found-btn.primary {
+  background-color: var(--primary-color);
+  color: white;
+  box-shadow: 0 2px 8px rgba(13, 71, 161, 0.3);
+}
+
+.not-found-btn.primary:hover {
+  background-color: #1565c0;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(13, 71, 161, 0.4);
+}
+
+.not-found-btn.secondary {
+  background-color: transparent;
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+}
+
+.not-found-btn.secondary:hover {
+  background-color: rgba(13, 71, 161, 0.05);
+  transform: translateY(-2px);
+}
+
+/* ========== RESPONZÍVNE ÚPRAVY ========== */
+@media (max-width: 768px) {
+  .not-found-content {
+    padding: 2rem;
+    margin: 1rem;
+  }
+
+  .not-found-content h1 {
+    font-size: 5rem;
+  }
+
+  .not-found-content h2 {
+    font-size: 1.5rem;
+  }
+
+  .not-found-content p {
+    font-size: 0.95rem;
+  }
+
+  .not-found-btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .not-found-content h1 {
+    font-size: 3.5rem;
+  }
+
+  .not-found-content h2 {
+    font-size: 1.2rem;
+  }
+
+  .not-found-buttons {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .not-found-btn {
+    width: 100%;
+  }
+}
+
+/* ========== ABOUT PAGE ========== */
+.about-page {
+  min-height: 100vh;
+  background: #f8f9fa;
+  padding-top: 5rem;
+}
+
+.about-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Hero sekcia */
+.about-hero {
+  text-align: center;
+  padding: 3rem 2rem;
+  background: linear-gradient(135deg, #0d47a1 0%, #1976d2 100%);
+  border-radius: 24px;
+  color: white;
+  margin-bottom: 3rem;
+}
+
+.about-hero h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.about-hero p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+/* Sekcie */
+.about-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: 4rem;
+  align-items: center;
+}
+
+.about-section.reverse {
+  direction: rtl;
+}
+
+.about-section.reverse .about-text {
+  direction: ltr;
+}
+
+.about-text h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.about-text p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #555;
+  margin-bottom: 1rem;
+}
+
+.about-image {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.about-image img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+/* Hodnoty list */
+.about-values-list {
+  list-style: none;
+  padding: 0;
+}
+
+.about-values-list li {
+  padding: 0.75rem 0;
+  font-size: 1rem;
+  color: #555;
+  border-bottom: 1px solid #eee;
+}
+
+.about-values-list li:last-child {
+  border-bottom: none;
+}
+
+/* Ponuky karty */
+.about-offers {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.offer-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s;
+}
+
+.offer-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.offer-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.offer-card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.offer-card p {
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.5;
+}
+
+/* Štatistiky */
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  background: white;
+  padding: 3rem;
+  border-radius: 24px;
+  margin-bottom: 4rem;
+  text-align: center;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+}
+
+.stat-number {
+  display: block;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #0d47a1;
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Tím */
+.about-team {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.about-team h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.team-members {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.team-member {
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s;
+}
+
+.team-member:hover {
+  transform: translateY(-4px);
+}
+
+.member-photo {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 1rem;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #e0e0e0;
+}
+
+.member-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.team-member h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.25rem;
+  color: #333;
+}
+
+.team-member p {
+  font-size: 0.85rem;
+  color: #0d47a1;
+  margin-bottom: 1rem;
+}
+
+.member-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.8rem;
+  color: #666;
+}
+
+/* CTA sekcia */
+.about-cta {
+  text-align: center;
+  background: linear-gradient(135deg, #0d47a1 0%, #1976d2 100%);
+  padding: 3rem;
+  border-radius: 6px;
+  color: white;
+}
+
+/* ========== CTA SEKCE ========== */
+.homepage-cta {
+  max-width: 1200px;
+  margin: 3rem auto;
+  background: linear-gradient(135deg, #0d47a1 0%, #1976d2 100%);
+  border-radius: 32px;
+  padding: 1rem;
+  position: relative;
+  overflow: visible;
+  text-align: left;
+}
+
+.cta-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+  position: relative;
+}
+
+/* Ľavá časť */
+.cta-left {
+  flex: 1;
+  padding: 2rem;
+  color: white;
+}
+
+.cta-left h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1.3;
+}
+
+.cta-left p {
+  font-size: 1rem;
+  opacity: 0.9;
+  margin-bottom: 1.5rem;
+}
+
+.cta-button {
+  background-color: white;
+  color: #0d47a1;
+  border: none;
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Stredná časť - domček a kartičky */
+.cta-center {
+  flex: 1;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+}
+
+.cta-center img {
+  max-width: 480px;
+  height: auto;
+  padding-right: 2rem;
+  z-index: 2;
+  position: relative;
+}
+
+/* Spoločné štýly pre kartičky */
+.stat-card {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 0.75rem 1rem;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  z-index: 3;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(4px);
+}
+
+.stat-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
+}
+
+.stat-icon {
+  font-size: 1.5rem;
+}
+
+.stat-text h3 {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.stat-text p {
+  font-size: 0.7rem;
+  color: #666;
+  margin: 0;
+}
+
+.highlight-value {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0d47a1;
+}
+
+/* Pozície kartičiek okolo domčeka */
+.stat-card-1 {
+  top: 80px;
+  left: -40px;
+}
+
+.stat-card-2 {
+  bottom: 20px;
+  right: 150px;
+}
+
+.stat-card-3 {
+  top: 50%;
+  right: 10px;
+}
+
+/* Responzívne úpravy */
+@media (max-width: 900px) {
+  .homepage-cta {
+    padding: 2rem;
+  }
+
+  .cta-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .cta-left {
+    text-align: center;
+  }
+
+  .cta-left h2 {
+    font-size: 1.5rem;
+  }
+
+  .cta-center {
+    min-height: 350px;
+  }
+
+  .cta-center img {
+    max-width: 220px;
+  }
+
+  .stat-card-1 {
+    top: -30px;
+    left: -20px;
+  }
+
+  .stat-card-2 {
+    bottom: -30px;
+    right: -20px;
+  }
+
+  .stat-card-3 {
+    right: -20px;
+  }
+
+  .stat-text h3 {
+    font-size: 0.75rem;
+  }
+
+  .stat-text p {
+    font-size: 0.65rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .homepage-cta {
+    padding: 1.5rem;
+    margin: 2rem 1rem;
+  }
+
+  .cta-center img {
+    max-width: 180px;
+  }
+
+  .stat-card {
+    padding: 0.5rem 0.75rem;
+  }
+
+  .stat-icon {
+    font-size: 1.2rem;
+  }
+
+  .stat-text h3 {
+    font-size: 0.7rem;
+  }
+
+  .stat-text p {
+    font-size: 0.6rem;
+  }
+
+  .stat-card-1 {
+    top: -20px;
+    left: -10px;
+  }
+
+  .stat-card-2 {
+    bottom: -20px;
+    right: -10px;
+  }
+
+  .stat-card-3 {
+    right: -10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cta-center {
+    min-height: 300px;
+  }
+
+  .cta-center img {
+    max-width: 150px;
+  }
+
+  .stat-card {
+    position: static;
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .cta-center {
+    flex-direction: column;
+  }
+
+  .cta-center img {
+    order: -1;
+    margin-bottom: 1rem;
+  }
+}
+
+/* Responzívne úpravy */
+@media (max-width: 900px) {
+  .cta-main {
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .cta-content {
+    text-align: center;
+  }
+
+  .cta-content h2 {
+    font-size: 1.5rem;
+  }
+
+  .cta-image {
+    justify-content: center;
+  }
+
+  .cta-image img {
+    max-width: 200px;
+  }
+
+  .cta-stats {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 0 2rem 2rem 2rem;
+  }
+
+  .stat-card {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .cta-main {
+    padding: 1.5rem;
+  }
+
+  .cta-content h2 {
+    font-size: 1.2rem;
+  }
+
+  .cta-button {
+    padding: 0.6rem 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  .cta-image img {
+    max-width: 150px;
+  }
+
+  .cta-stats {
+    padding: 0 1.5rem 1.5rem 1.5rem;
+  }
+
+  .stat-icon {
+    font-size: 1.5rem;
+  }
+
+  .stat-content h3 {
+    font-size: 0.85rem;
+  }
+
+  .stat-content p {
+    font-size: 0.7rem;
+  }
+}
+.cta-content {
+  flex: 1;
+  padding: 3rem;
+  color: white;
+  z-index: 2;
+}
+
+.cta-content h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.cta-content p {
+  font-size: 1rem;
+  opacity: 0.9;
+  margin-bottom: 1.5rem;
+}
+
+.cta-button {
+  background-color: white;
+  color: #0d47a1;
+  border: none;
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.cta-image {
+  flex: 0.8;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.cta-image img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+/* Responzívne úpravy */
+@media (max-width: 900px) {
+  .homepage-cta {
+    flex-direction: column;
+    text-align: center;
+    margin: 2rem 1rem;
+  }
+
+  .cta-content {
+    padding: 2rem;
+  }
+
+  .cta-content h2 {
+    font-size: 1.4rem;
+  }
+
+  .cta-content p {
+    font-size: 0.9rem;
+  }
+
+  .cta-image {
+    justify-content: center;
+    padding: 0 2rem 2rem;
+  }
+
+  .cta-image img {
+    max-width: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cta-content {
+    padding: 1.5rem;
+  }
+
+  .cta-content h2 {
+    font-size: 1.2rem;
+  }
+
+  .cta-button {
+    padding: 0.6rem 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  .cta-image img {
+    max-width: 150px;
+  }
+}
+
+/* Responzívne úpravy */
+@media (max-width: 900px) {
+  .about-section {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .about-section.reverse {
+    direction: ltr;
+  }
+
+  .about-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    padding: 2rem;
+  }
+
+  .about-hero h1 {
+    font-size: 2.5rem;
+  }
+
+  .about-hero p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-container {
+    padding: 1rem;
+  }
+
+  .about-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .team-members {
+    grid-template-columns: 1fr;
+  }
+
+  .about-cta h2 {
+    font-size: 1.3rem;
+  }
+
+  .about-text h2 {
+    font-size: 1.5rem;
+  }
+}
+
+/* ========== LATEST REALITIES ========== */
+.latest-realities-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem;
+  padding: 2em;
+  align-items: center;
+  justify-content: center;
+}
+
+.section-header {
+  display: flex;
+  justify-content: center; /* Vycentrovanie */
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section-header h1 {
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+  text-align: center; /* Vycentrovanie textu */
+}
+
+.latest-realities-container .realities-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  max-width: 1200px;
+}
+
+.view-all-container {
+  display: flex;
+  justify-content: center;
+}
+
+.view-all-container .styled-button {
+  background-color: transparent;
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.view-all-container .styled-button:hover {
+  background-color: var(--primary-color);
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* Responzívne */
+@media (max-width: 768px) {
+  .latest-realities-container {
+    padding: 1em;
+  }
+
+  .section-header h1 {
+    font-size: 1.2rem;
+  }
+
+  .latest-realities-container .realities-list {
+    gap: 1rem;
+  }
+
+  .view-all-container .styled-button {
+    padding: 0.6rem 1.5rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .latest-realities-container .realities-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Pre MinimalLayout - rovnaké štýly ako hlavný Layout */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 2rem;
+  background-color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header-left {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.header-logo {
+  height: 35px;
+  cursor: pointer;
+}
+
+.header-center {
+  flex: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+.header-center a {
+  text-decoration: none;
+  color: #0d47a1;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.header-center a:hover {
+  color: #1565c0;
+}
+
+.header-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Mobilné úpravy */
+@media (max-width: 768px) {
+  header {
+    padding: 0.5rem 1rem;
+  }
+
+  .desktop-menu {
+    display: none;
+  }
+
+  .mobile-menu-button {
+    display: block;
+  }
+
+  .header-logo {
+    height: 28px;
+  }
+}
+
+.favorites-wrapper {
+  margin: 2rem auto;
+  max-width: 1200px;
+}
