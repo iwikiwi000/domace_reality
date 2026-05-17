@@ -4,7 +4,7 @@ import type { LoginDto, RegisterDto } from './auth.dto';
 import { LoginSchema, RegisterSchema } from './auth.dto';
 import { AuthService } from './auth.service';
 import { Public } from './public.decorator';
-
+//ergedrjrdtj
 @Public()
 @Controller('auth')
 export class AuthController {
