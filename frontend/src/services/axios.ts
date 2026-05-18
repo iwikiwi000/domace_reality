@@ -3,7 +3,7 @@ import { authService } from "./authService";
 
 const axiosInstance = axios.create({
   //baseURL: "http://localhost:3000",
-  baseURL: "http://domacereality.pavojka.sk/",
+  baseURL: "http://api.domacereality.pavojka.sk/",
   headers: {
     "Content-Type": "application/json",
   },
