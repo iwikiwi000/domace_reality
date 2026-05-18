@@ -2,7 +2,8 @@ import axios from "axios";
 import { authService } from "./authService";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:3000",
+  //baseURL: "http://localhost:3000",
+  baseURL: "http://domacereality.pavojka.sk/",
   headers: {
     "Content-Type": "application/json",
   },
@@ -18,7 +19,7 @@ axiosInstance.interceptors.request.use(
   },
   (error) => {
     return Promise.reject(error);
-  }
+  },
 );
 
 export default axiosInstance;
