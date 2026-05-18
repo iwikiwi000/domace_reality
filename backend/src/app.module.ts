@@ -20,15 +20,14 @@ if (!existsSync(uploadsDir)) {
 
 @Module({
   imports: [
-    NehnutelnostModule,
-    UsersModule,
-    AuthModule,
-    MongooseModule.forRoot('mongodb://localhost:27017/reality'),
     ConfigModule.forRoot({
       envFilePath: '.env',
       isGlobal: true,
     }),
+    NehnutelnostModule,
+    UsersModule,
     AuthModule,
+    MongooseModule.forRoot(process.env.MONGODB_URI),
     OffersModule,
   ],
   controllers: [AppController],
